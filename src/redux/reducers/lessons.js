@@ -19,6 +19,15 @@ const firstLesson = (state) => {
   return newState;
 };
 
+const lastLesson = (state) => {
+  const newState = { ...state };
+  const { modules } = state;
+  newState.currentModule = modules[modules.length - 1];
+  const { lessons } = newState.currentModule;
+  newState.currentLesson = lessons[lessons.length - 1];
+  return newState;
+};
+
 const nextLesson = (state) => {
   const newState = { ...state };
   const { currentLesson, currentModule, modules } = state;
@@ -36,6 +45,24 @@ const nextLesson = (state) => {
   return newState;
 };
 
+const previousLesson = (state) => {
+  const newState = { ...state };
+  const { currentLesson, currentModule, modules } = state;
+  if (!!currentModule.id) {
+    const indexLesson = currentModule.lessons.findIndex(
+      (l) => l.id === currentLesson.id
+    );
+    if (indexLesson > 0)
+      newState.currentLesson = currentModule.lessons[indexLesson - 1];
+    else if (currentModule.id > 1) {
+      newState.currentModule = modules[currentModule.id - 2];
+      const { lessons } = newState.currentModule;
+      newState.currentLesson = lessons[lessons.length - 1];
+    }
+  }
+  return newState;
+};
+
 const reducer = (state = initialState, action) => {
   try {
     const { type, payload } = action;
@@ -44,6 +71,10 @@ const reducer = (state = initialState, action) => {
         return changeLesson(state, payload);
       case reduxTypes.firstLesson:
         return firstLesson(state);
+      case reduxTypes.lastLesson:
+        return lastLesson(state);
+      case reduxTypes.previousLesson:
+        return previousLesson(state);
       case reduxTypes.nextLesson:
         return nextLesson(state);
     }
