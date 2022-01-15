@@ -18,8 +18,13 @@ footer {
   width: 120px;
   border-radius: 10px;
   user-select: none;
+  font-weight: bold;
+  color: white;
 }
 .buttons li:hover {
   cursor: pointer;
   box-shadow: 2px 2px 2px black;
+}
+.buttons li:active {
+  background-color: darkgreen;
 }
