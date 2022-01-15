@@ -1,9 +1,15 @@
 import { createStore } from "redux";
+import { modulesAndLessons } from "../constants";
 
-const reducer = (state = null, action) => {
-  console.log(state);
+const initialState = {
+  modules: modulesAndLessons,
+  currentModule: {},
+  currentLesson: {},
+};
+
+const reducer = (state = initialState, action) => {
   console.log(action);
-  return { value: "TESTE" };
+  return state;
 };
 
 const store = createStore(reducer);
