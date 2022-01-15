@@ -1,7 +1,25 @@
 .main {
   width: 60%;
   max-width: 500px;
-  background-color: red;
+  background-color: black;
+  color: white;
   display: block;
   margin: auto;
+  border-radius: 20px;
+  padding: 2px 20px 15px;
+}
+
+.main h1 {
+  text-align: center;
+}
+.main__lesson {
+  justify-content: space-between;
+}
+.main__lesson:hover {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.main__lesson:active {
+  cursor: default;
 }
