@@ -1,17 +1,31 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./style.scss";
+import { reduxTypes } from "../../constants";
 
-const Footer = () => {
+const Footer = ({ dispatch }) => {
+  const firstLesson = () => {
+    dispatch({ type: reduxTypes.firstLesson });
+  };
+  const lastLesson = () => {
+    dispatch({ type: reduxTypes.lastLesson });
+  };
+  const previouLesson = () => {
+    dispatch({ type: reduxTypes.previousLesson });
+  };
+  const nextLesson = () => {
+    dispatch({ type: reduxTypes.nextLesson });
+  };
   return (
     <footer>
       <ul className="buttons">
-        <li>Primeira Aula</li>
-        <li>Voltar Aula</li>
-        <li>Próxima Aula</li>
-        <li>Última Aula</li>
+        <li onClick={firstLesson}>Primeira Aula</li>
+        <li onClick={previouLesson}>Voltar Aula</li>
+        <li onClick={nextLesson}>Próxima Aula</li>
+        <li onClick={lastLesson}>Última Aula</li>
       </ul>
     </footer>
   );
 };
 
-export default Footer;
+export default connect()(Footer);
