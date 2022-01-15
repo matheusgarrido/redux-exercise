@@ -21,7 +21,7 @@ const lessons = [
   },
   {
     id: 3,
-    title: "JS",
+    title: "JavaScript",
     lessons: [
       { id: 9, title: "Const" },
       { id: 10, title: "Alert" },
