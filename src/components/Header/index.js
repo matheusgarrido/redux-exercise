@@ -1,14 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
-import { modulesAndLessons } from "../../constants";
 
-const header = (props) => {
-  const module = "HTML";
-  const lesson = "Aula 1";
-  console.log(props);
+const header = ({ module, lesson }) => {
   return (
     <header style={{ textAlign: "center" }}>
-      {module} | {lesson}
+      {!!lesson.id ? (
+        <>
+          <h1>Módulo {module.title}</h1>
+          <p>
+            Aula {lesson.id}: {lesson.title}
+          </p>
+        </>
+      ) : (
+        <>
+          <h1>Bem-vindo!</h1>
+          <p>Selecione uma aula</p>
+        </>
+      )}
     </header>
   );
 };
