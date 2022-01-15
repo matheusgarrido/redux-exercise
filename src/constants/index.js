@@ -1,3 +1,4 @@
 import modulesAndLessons from "./lessons";
+import reduxTypes from "./reduxTypes";
 
-export { modulesAndLessons };
+export { modulesAndLessons, reduxTypes };
