@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { modulesAndLessons } from "../constants";
+import { modulesAndLessons, reduxTypes } from "../constants";
 
 const initialState = {
   modules: modulesAndLessons,
@@ -8,7 +8,14 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
+  try {
+    const { type, payload } = action;
+    switch (type) {
+      case reduxTypes.changeLesson:
+        console.log(payload);
+        return { ...state, ...payload };
+    }
+  } catch (e) {}
   return state;
 };
 
