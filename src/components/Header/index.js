@@ -22,8 +22,8 @@ const header = ({ module, lesson }) => {
 };
 
 const mapStateToProps = (state) => ({
-  module: state.currentModule,
-  lesson: state.currentLesson,
+  module: state.lessons.currentModule,
+  lesson: state.lessons.currentLesson,
 });
 
 export default connect(mapStateToProps)(header);

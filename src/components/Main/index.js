@@ -4,44 +4,53 @@ import "./style.scss";
 import { reduxTypes } from "../../constants";
 
 const Lesson = (props) => {
-  const { module, lesson, changeLesson } = props;
+  const { module, lesson, changeLesson, currentLesson } = props;
+  console.log(props);
   const click = () => changeLesson(module, lesson);
   return (
-    <li key={lesson.id} className="main__lesson" onClick={click}>
+    <li
+      className={`main__lesson ${
+        !!currentLesson && currentLesson.id === lesson.id ? "main__current" : ""
+      }`}
+      onClick={click}
+    >
       {lesson.title}
     </li>
   );
 };
 
 const Module = (props) => {
-  const { module } = props;
+  const { module, currentModule } = props;
   return (
-    <div key={module.id}>
-      {module.title}
+    <div>
+      <p className={currentModule.id === module.id ? "main__current" : ""}>
+        {module.title}
+      </p>
       <ul>
         {module.lessons.map((lesson) => (
-          <Lesson {...props} lesson={lesson} />
+          <Lesson {...props} lesson={lesson} key={lesson.id} />
         ))}
       </ul>
     </div>
   );
 };
 
-const Main = ({ modules, currentModule, currentLesson, changeLesson }) => {
+const Main = (props) => {
+  const { modules } = props;
   return (
     <main className="main">
       <h1>Programação Web </h1>
       {modules.map((module) => (
-        <Module module={module} changeLesson={changeLesson} />
+        <Module {...props} module={module} key={module.id} />
       ))}
     </main>
   );
 };
 
 const mapStateToProps = (state) => ({
-  modules: state.modules,
-  currentModule: state.currentModule,
-  currentLesson: state.currentLession,
+  modules: state.lessons.modules,
+  currentModule: state.lessons.currentModule,
+  currentLesson: state.lessons.currentLesson,
 });
 
 const mapDispatchToProps = (dispatch) => ({
