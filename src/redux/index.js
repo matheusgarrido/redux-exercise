@@ -12,7 +12,8 @@ const reducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
       case reduxTypes.changeLesson:
-        console.log(payload);
+        if (payload.currentLesson === state.currentLesson)
+          return { ...state, currentLesson: {}, currentModule: {} };
         return { ...state, ...payload };
     }
   } catch (e) {}
