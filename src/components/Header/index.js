@@ -7,9 +7,9 @@ const header = (props) => {
   const lesson = "Aula 1";
   console.log(props);
   return (
-    <div style={{ textAlign: "center" }}>
+    <header style={{ textAlign: "center" }}>
       {module} | {lesson}
-    </div>
+    </header>
   );
 };
 
