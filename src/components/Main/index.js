@@ -5,7 +5,6 @@ import { reduxTypes } from "../../constants";
 
 const Lesson = (props) => {
   const { module, lesson, changeLesson, currentLesson } = props;
-  console.log(props);
   const click = () => changeLesson(module, lesson);
   return (
     <li
