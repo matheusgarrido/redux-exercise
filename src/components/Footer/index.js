@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./style.scss";
-import * as lessonActions from "../../redux/actions/lessons";
+import { Actions as lessonActions } from "../../redux/ducks/lessons";
 
 const Footer = ({ firstLesson, previouLesson, nextLesson, lastLesson }) => {
   return (

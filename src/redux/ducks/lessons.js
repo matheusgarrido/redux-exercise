@@ -1,5 +1,27 @@
-import { modulesAndLessons, reduxTypes } from "../../constants";
+import { modulesAndLessons } from "../../constants";
 
+//Types
+export const Types = {
+  changeLesson: "CHANGE_LESSON",
+  firstLesson: "FIRST_LESSON",
+  lastLesson: "LAST_LESSON",
+  previousLesson: "PREVIOUS_LESSON",
+  nextLesson: "NEXT_LESSON",
+};
+
+//Actions
+export const Actions = {
+  changeLesson: (module, lesson) => ({
+    type: Types.changeLesson,
+    payload: { currentModule: module, currentLesson: lesson },
+  }),
+  firstLesson: () => ({ type: Types.firstLesson }),
+  lastLesson: () => ({ type: Types.lastLesson }),
+  previouLesson: () => ({ type: Types.previousLesson }),
+  nextLesson: () => ({ type: Types.nextLesson }),
+};
+
+//Reducers
 const initialState = {
   modules: modulesAndLessons,
   currentModule: {},
@@ -67,15 +89,15 @@ const reducer = (state = initialState, action) => {
   try {
     const { type, payload } = action;
     switch (type) {
-      case reduxTypes.changeLesson:
+      case Types.changeLesson:
         return changeLesson(state, payload);
-      case reduxTypes.firstLesson:
+      case Types.firstLesson:
         return firstLesson(state);
-      case reduxTypes.lastLesson:
+      case Types.lastLesson:
         return lastLesson(state);
-      case reduxTypes.previousLesson:
+      case Types.previousLesson:
         return previousLesson(state);
-      case reduxTypes.nextLesson:
+      case Types.nextLesson:
         return nextLesson(state);
     }
   } catch (e) {}
