@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./style.scss";
-import { Actions as lessonActions } from "../../redux/ducks/lessons";
+import { Creators as lessonActions } from "../../redux/ducks/lessons";
 
 const Lesson = (props) => {
   const { module, lesson, changeLesson, currentLesson } = props;
@@ -37,7 +37,6 @@ const Module = (props) => {
 
 const Main = (props) => {
   const { modules } = props;
-  console.log(props);
   return (
     <main className="main">
       <h1>Programação Web </h1>

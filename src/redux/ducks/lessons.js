@@ -1,25 +1,14 @@
+import { createActions, createReducer } from "reduxsauce";
 import { modulesAndLessons } from "../../constants";
 
-//Types
-export const Types = {
-  changeLesson: "CHANGE_LESSON",
-  firstLesson: "FIRST_LESSON",
-  lastLesson: "LAST_LESSON",
-  previousLesson: "PREVIOUS_LESSON",
-  nextLesson: "NEXT_LESSON",
-};
-
-//Actions
-export const Actions = {
-  changeLesson: (module, lesson) => ({
-    type: Types.changeLesson,
-    payload: { currentModule: module, currentLesson: lesson },
-  }),
-  firstLesson: () => ({ type: Types.firstLesson }),
-  lastLesson: () => ({ type: Types.lastLesson }),
-  previouLesson: () => ({ type: Types.previousLesson }),
-  nextLesson: () => ({ type: Types.nextLesson }),
-};
+//Types and actions (creators)
+export const { Types, Creators } = createActions({
+  changeLesson: ["currentModule", "currentLesson"],
+  firstLesson: [],
+  lastLesson: [],
+  previousLesson: [],
+  nextLesson: [],
+});
 
 //Reducers
 const initialState = {
@@ -28,20 +17,21 @@ const initialState = {
   currentLesson: {},
 };
 
-const changeLesson = (state, payload) => {
-  if (payload.currentLesson === state.currentLesson)
+const changeLesson = (state = initialState, action) => {
+  const { currentModule, currentLesson } = action;
+  if (currentLesson === state.currentLesson)
     return { ...state, currentLesson: {}, currentModule: {} };
-  return { ...state, ...payload };
+  return { ...state, currentLesson, currentModule };
 };
 
-const firstLesson = (state) => {
+const firstLesson = (state = initialState, action) => {
   const newState = { ...state };
   newState.currentModule = state.modules[0];
   newState.currentLesson = state.modules[0].lessons[0];
   return newState;
 };
 
-const lastLesson = (state) => {
+const lastLesson = (state = initialState, action) => {
   const newState = { ...state };
   const { modules } = state;
   newState.currentModule = modules[modules.length - 1];
@@ -50,7 +40,7 @@ const lastLesson = (state) => {
   return newState;
 };
 
-const nextLesson = (state) => {
+const nextLesson = (state = initialState, action) => {
   const newState = { ...state };
   const { currentLesson, currentModule, modules } = state;
   if (!!currentModule.id) {
@@ -67,7 +57,7 @@ const nextLesson = (state) => {
   return newState;
 };
 
-const previousLesson = (state) => {
+const previousLesson = (state = initialState, action) => {
   const newState = { ...state };
   const { currentLesson, currentModule, modules } = state;
   if (!!currentModule.id) {
@@ -85,23 +75,10 @@ const previousLesson = (state) => {
   return newState;
 };
 
-const reducer = (state = initialState, action) => {
-  try {
-    const { type, payload } = action;
-    switch (type) {
-      case Types.changeLesson:
-        return changeLesson(state, payload);
-      case Types.firstLesson:
-        return firstLesson(state);
-      case Types.lastLesson:
-        return lastLesson(state);
-      case Types.previousLesson:
-        return previousLesson(state);
-      case Types.nextLesson:
-        return nextLesson(state);
-    }
-  } catch (e) {}
-  return state;
-};
-
-export default reducer;
+export default createReducer(initialState, {
+  [Types.CHANGE_LESSON]: changeLesson,
+  [Types.FIRST_LESSON]: firstLesson,
+  [Types.LAST_LESSON]: lastLesson,
+  [Types.PREVIOUS_LESSON]: previousLesson,
+  [Types.NEXT_LESSON]: nextLesson,
+});

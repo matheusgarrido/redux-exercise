@@ -2,14 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./style.scss";
-import { Actions as lessonActions } from "../../redux/ducks/lessons";
+import { Creators as lessonActions } from "../../redux/ducks/lessons";
 
-const Footer = ({ firstLesson, previouLesson, nextLesson, lastLesson }) => {
+const Footer = (props) => {
+  const { firstLesson, previousLesson, nextLesson, lastLesson } = props;
   return (
     <footer>
       <ul className="buttons">
         <li onClick={() => firstLesson()}>Primeira Aula</li>
-        <li onClick={() => previouLesson()}>Voltar Aula</li>
+        <li onClick={() => previousLesson()}>Voltar Aula</li>
         <li onClick={() => nextLesson()}>Próxima Aula</li>
         <li onClick={() => lastLesson()}>Última Aula</li>
       </ul>
