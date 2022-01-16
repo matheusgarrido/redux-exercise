@@ -1,11 +1,12 @@
-import { connect } from "react-redux";
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import "./style.scss";
 import * as lessonActions from "../../redux/actions/lessons";
 
 const Lesson = (props) => {
-  const { module, lesson, dispatch, currentLesson } = props;
-  const click = () => dispatch(lessonActions.changeLesson(module, lesson));
+  const { module, lesson, changeLesson, currentLesson } = props;
+  const click = () => changeLesson(module, lesson);
   return (
     <li
       className={`main__lesson ${
@@ -53,9 +54,7 @@ const mapStateToProps = (state) => ({
   currentLesson: state.lessons.currentLesson,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  // changeLesson: (value) => dispatch(value),
-});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(lessonActions, dispatch);
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Main);
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
