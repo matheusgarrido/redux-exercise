@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import React from "react";
 import "./style.scss";
-import { reduxTypes } from "../../constants";
+import * as lessonActions from "../../redux/actions/lessons";
 
 const Lesson = (props) => {
-  const { module, lesson, changeLesson, currentLesson } = props;
-  const click = () => changeLesson(module, lesson);
+  const { module, lesson, dispatch, currentLesson } = props;
+  const click = () => dispatch(lessonActions.changeLesson(module, lesson));
   return (
     <li
       className={`main__lesson ${
@@ -36,6 +36,7 @@ const Module = (props) => {
 
 const Main = (props) => {
   const { modules } = props;
+  console.log(props);
   return (
     <main className="main">
       <h1>Programação Web </h1>
@@ -53,11 +54,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeLesson: (module, lesson) =>
-    dispatch({
-      type: reduxTypes.changeLesson,
-      payload: { currentModule: module, currentLesson: lesson },
-    }),
+  // changeLesson: (value) => dispatch(value),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+// export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps)(Main);
