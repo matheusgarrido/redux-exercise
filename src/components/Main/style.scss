@@ -12,18 +12,20 @@
 .main h1 {
   text-align: center;
 }
+
 .main__lesson {
   justify-content: space-between;
   user-select: none;
+  &:hover {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  &:active {
+    cursor: default;
+  }
 }
-.main__lesson:hover {
-  color: blue;
-  cursor: pointer;
-  text-decoration: underline;
-}
-.main__lesson:active {
-  cursor: default;
-}
+
 .main__current {
   color: green;
   font-weight: bold;

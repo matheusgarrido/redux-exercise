@@ -2,6 +2,7 @@ footer {
   margin: auto;
   text-align: center;
 }
+
 .buttons {
   list-style-type: none;
   display: inline-flex;
@@ -20,11 +21,11 @@ footer {
   user-select: none;
   font-weight: bold;
   color: white;
-}
-.buttons li:hover {
-  cursor: pointer;
-  box-shadow: 2px 2px 2px black;
-}
-.buttons li:active {
-  background-color: darkgreen;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 2px black;
+  }
+  &:active {
+    background-color: darkgreen;
+  }
 }
